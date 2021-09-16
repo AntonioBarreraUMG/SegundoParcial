@@ -115,7 +115,7 @@ public class MainController implements Initializable {
                 txtTotal.setText(datos[5]);
                 txtPromedio.setText(datos[6]);
             } 
-        } catch (NumberFormatException ex) {
+        } catch (Exception ex) {
             new Alert(Alert.AlertType.ERROR, errorMessage).showAndWait();
         } finally {
             txtBuscarCodigo.clear();
@@ -182,9 +182,9 @@ public class MainController implements Initializable {
             if (!txtBuscarCantidad.getText().isBlank()) {
                 cantidad = Double.valueOf(txtBuscarCantidad.getText());
                 if (cantidad != null) {
-                    resultado = empleados.buscarPorCantidad(cantidad);
+                    resultado = "Resultado: \n" + empleados.buscarPorCantidad(cantidad);
                 } else {
-                    resultado = "NOs se encontraron resultados.";
+                    resultado = "No se encontraron resultados.";
                 }
                 new Alert(Alert.AlertType.INFORMATION, resultado).showAndWait();
             }
@@ -199,7 +199,7 @@ public class MainController implements Initializable {
     void eventMayorVendedor(ActionEvent event) {
         String resultado = null;
         try {
-            resultado = "Resultado: " + empleados.buscarMayorVendedorGeneral();
+            resultado = "Resultado: \n" + empleados.buscarMayorVendedorGeneral();
             new Alert(Alert.AlertType.INFORMATION, resultado).showAndWait();
         } catch (Exception ex) {
             new Alert(Alert.AlertType.ERROR, errorMessage).showAndWait();
@@ -213,10 +213,10 @@ public class MainController implements Initializable {
             if (!txtBuscarMes.getText().isBlank()) {
                 int mes = Integer.parseInt(txtBuscarMes.getText());
                 if (mes > 0 && mes < 4) {
-                    resultado = "Resultado: " + empleados.buscarMayorYMenorVendedorPorMes(mes);
+                    resultado = "Resultado: \n" + empleados.buscarMayorYMenorVendedorPorMes(mes);
                     
                 } else {
-                    resultado = "Ingrese un mes entre 1 y 3.";
+                    resultado = "Ingrese un mes válido.";
                 }
                 new Alert(Alert.AlertType.INFORMATION, resultado).showAndWait();
             }
