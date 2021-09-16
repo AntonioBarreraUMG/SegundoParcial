@@ -288,8 +288,8 @@ public class MainController implements Initializable {
         try {
             total = calcularTotalGeneral();
             promedio = Math.round((total/3) * 100.0) / 100.0;
-            txtTotalGeneral.setText(String.valueOf(total));
-            txtPromedioGeneral.setText(String.valueOf(promedio));
+            txtTotalGeneral.setText("Q." + String.valueOf(total));
+            txtPromedioGeneral.setText("Q." + String.valueOf(promedio));
             this.colCodigo.setCellValueFactory(new PropertyValueFactory("codigo"));
             this.colNombre.setCellValueFactory(new PropertyValueFactory("nombre"));
             this.colEnero.setCellValueFactory(new PropertyValueFactory("enero"));
