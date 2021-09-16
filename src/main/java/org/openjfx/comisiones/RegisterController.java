@@ -13,8 +13,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 
-import javafx.scene.control.Button;
-import javafx.scene.control.Hyperlink;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
@@ -34,14 +32,10 @@ public class RegisterController implements Initializable {
     @FXML
     private PasswordField txtConfirmarContraseña;
     
-    @FXML
-    private void eventKey(KeyEvent event) {
-        
-    }
 
     @FXML
     void eventLinkAction(ActionEvent event) throws IOException {
-        App.setRoot("Login");
+        App.setRoot("Login", event);
     }
 
     @FXML
@@ -51,7 +45,7 @@ public class RegisterController implements Initializable {
             usuario = new Usuario(txtRegistrarUsuario.getText(), txtRegistrarContraseña.getText());
             if (txtRegistrarContraseña.getText().equals(txtConfirmarContraseña.getText())) {
                 UsuarioJDBC.ejecutarConsulta(usuario, "INSERT");
-                App.setRoot("Login");
+                App.setRoot("Login", event);
             } else {
                 new Alert(Alert.AlertType.WARNING, "Las contraseñas no son iguales").showAndWait();
             }
@@ -59,10 +53,14 @@ public class RegisterController implements Initializable {
             new Alert(Alert.AlertType.ERROR, "Ha ocurrido un error").showAndWait();
         }
     }
-
-    /**
-     * Initializes the controller class.
-     */
+    
+    @FXML
+    private void eventKey(KeyEvent event) {
+        if (event.getCharacter().equals(' ')) {
+            event.consume();
+        }
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO

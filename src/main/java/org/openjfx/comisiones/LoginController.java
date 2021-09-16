@@ -32,15 +32,14 @@ public class LoginController implements Initializable {
 
     @FXML
     void eventKey(KeyEvent event) {
-        if (event.getCharacter().equals(" ")) {
-            new Alert(Alert.AlertType.ERROR, "EspacioEnBlanco").showAndWait();
+        if (event.getCharacter().equals(' ')) {
             event.consume();
         }
     }
-
+    
     @FXML
     void eventLinkAction(ActionEvent event) throws IOException {
-        App.setRoot("Register");
+        App.setRoot("Register", event);
     }
 
     @FXML
@@ -49,18 +48,15 @@ public class LoginController implements Initializable {
         try {
             usuario = new Usuario(txtUsuario.getText(), txtContraseña.getText());
             if (UsuarioJDBC.select_validacion(usuario)) {
-                App.setRoot("Main");
+                App.setRoot("Main", event);
             } else {
-                new Alert(Alert.AlertType.WARNING, "Usuario no valido").showAndWait();
+                new Alert(Alert.AlertType.WARNING, "Usuario no valido.").showAndWait();
             }
         } catch (Exception ex) {
-            new Alert(Alert.AlertType.ERROR, "Ha ocurrido un error").showAndWait();
+            new Alert(Alert.AlertType.ERROR, ex.toString()).showAndWait();
         }
     }
     
-    /**
-     * Initializes the controller class.
-     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO

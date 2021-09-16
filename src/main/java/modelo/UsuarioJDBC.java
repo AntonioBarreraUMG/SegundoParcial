@@ -14,7 +14,7 @@ import javafx.scene.control.Alert;
  * @author jeant
  */
 public class UsuarioJDBC {
-    private static final String errorMessage = "Ha ocurrido un problema de conexion.";
+    private static final String errorMessage = "Ha ocurrido un problema de autenticacion.";
     private static final String SQL_SELECT = "SELECT * FROM usuario";
     private static final String SQL_UPDATE = "UPDATE usuario SET username = ?, password = ? WHERE id_user = ?;";
     private static final String SQL_INSERT = "INSERT INTO usuario(username, password) VALUES(?, ?);";

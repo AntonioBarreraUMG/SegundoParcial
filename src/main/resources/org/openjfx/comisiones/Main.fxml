@@ -33,17 +33,17 @@
       <TextField fx:id="txtNombre" alignment="CENTER" layoutX="121.0" layoutY="230.0" onKeyTyped="#eventKey" prefHeight="25.0" prefWidth="90.0" />
       <TextField fx:id="txtEnero" alignment="CENTER" layoutX="230.0" layoutY="230.0" onKeyTyped="#eventKey" prefHeight="25.0" prefWidth="90.0" />
       <TextField fx:id="txtFebrero" alignment="CENTER" layoutX="336.0" layoutY="230.0" onKeyTyped="#eventKey" prefHeight="25.0" prefWidth="90.0" />
-      <TextField fx:id="txtCodigo" alignment="CENTER" editable="false" layoutX="14.0" layoutY="230.0" opacity="0.36" prefHeight="25.0" prefWidth="90.0">
+      <TextField fx:id="txtCodigo" alignment="CENTER" editable="false" layoutX="14.0" layoutY="230.0" opacity="0.6" prefHeight="25.0" prefWidth="90.0">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </TextField>
-      <TextField fx:id="txtPromedio" alignment="CENTER" editable="false" layoutX="656.0" layoutY="230.0" opacity="0.36" prefHeight="25.0" prefWidth="90.0">
+      <TextField fx:id="txtPromedio" alignment="CENTER" editable="false" layoutX="656.0" layoutY="230.0" opacity="0.6" prefHeight="25.0" prefWidth="90.0">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </TextField>
-      <TextField fx:id="txtTotal" alignment="CENTER" editable="false" layoutX="550.0" layoutY="230.0" opacity="0.36" prefHeight="25.0" prefWidth="90.0">
+      <TextField fx:id="txtTotal" alignment="CENTER" editable="false" layoutX="550.0" layoutY="230.0" opacity="0.6" prefHeight="25.0" prefWidth="90.0">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -107,15 +107,20 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <TextField fx:id="txtTotalGeneral" alignment="CENTER" editable="false" layoutX="551.0" layoutY="591.0" opacity="0.36" prefHeight="25.0" prefWidth="109.0">
+      <TextField fx:id="txtTotalGeneral" alignment="CENTER_RIGHT" editable="false" layoutX="551.0" layoutY="591.0" opacity="0.6" prefHeight="25.0" prefWidth="109.0">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </TextField>
-      <TextField fx:id="txtPromedioGeneral" alignment="CENTER" editable="false" layoutX="661.0" layoutY="590.0" opacity="0.36" prefHeight="25.0" prefWidth="101.0">
+      <TextField fx:id="txtPromedioGeneral" alignment="CENTER_RIGHT" editable="false" layoutX="661.0" layoutY="590.0" opacity="0.6" prefHeight="25.0" prefWidth="101.0">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </TextField>
+      <Button layoutX="3.0" layoutY="2.0" mnemonicParsing="false" onAction="#eventLogoutAction" style="-fx-background-color: cyan; -fx-border-color: cyan;" text="Cerrar Sesión">
+         <font>
+            <Font name="System Bold Italic" size="16.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

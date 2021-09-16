@@ -14,7 +14,7 @@ import javafx.scene.control.Alert;
  * @author jeant
  */
 public class AccesoDatosJDBC {
-    private static final String errorMessage = "Ha ocurrido un problema de conexion.";
+    private static final String errorMessage = "Ha ocurrido un problema de acceso a datos.";
     private static final String SQL_SELECT = "SELECT * FROM tb_empleados";
     private static final String SQL_INSERT = "INSERT INTO tb_empleados(nombre, enero, febrero, marzo, total, promedio) VALUES(?,?,?,?,?,?)";
     private static final String SQL_UPDATE = "UPDATE tb_empleados SET nombre = ?, enero = ?, febrero = ?, marzo = ?, total = ?, promedio = ? WHERE codigo = ?";

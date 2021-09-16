@@ -5,6 +5,7 @@
  */
 package org.openjfx.comisiones;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -93,6 +94,11 @@ public class MainController implements Initializable {
     private TextField txtPromedioGeneral;
     
     @FXML
+    void eventLogoutAction(ActionEvent event) throws IOException {
+        App.setRoot("Login", event);
+    }
+    
+    @FXML
     void eventBuscarCodigo(ActionEvent event) {
         String resultado = null;
         String[] datos = null;
@@ -109,7 +115,7 @@ public class MainController implements Initializable {
                 txtTotal.setText(datos[5]);
                 txtPromedio.setText(datos[6]);
             } 
-        } catch (Exception ex) {
+        } catch (NumberFormatException ex) {
             new Alert(Alert.AlertType.ERROR, errorMessage).showAndWait();
         } finally {
             txtBuscarCodigo.clear();
@@ -131,7 +137,7 @@ public class MainController implements Initializable {
             new Alert(Alert.AlertType.ERROR, errorMessage).showAndWait();
         } finally {
             clearTextFields();
-            listarDatos();
+            actualizarDatos();
         }
     }
     
@@ -150,7 +156,7 @@ public class MainController implements Initializable {
             new Alert(Alert.AlertType.ERROR, errorMessage).showAndWait();
         } finally {
             clearTextFields();
-            listarDatos();
+            actualizarDatos();
         }
     }
 
@@ -159,13 +165,12 @@ public class MainController implements Initializable {
         try {
             if (!txtCodigo.getText().isBlank()) {
                 empleados.borrarEmpleado(Integer.valueOf(txtCodigo.getText()));
-                new Alert(Alert.AlertType.CONFIRMATION, "¿Estas seguro?").showAndWait();
             } 
         } catch (NumberFormatException ex){
             new Alert(Alert.AlertType.ERROR, errorMessage).showAndWait();
         } finally {
             clearTextFields();
-            listarDatos();
+            actualizarDatos();
         }
     }
 
@@ -176,11 +181,15 @@ public class MainController implements Initializable {
         try {
             if (!txtBuscarCantidad.getText().isBlank()) {
                 cantidad = Double.valueOf(txtBuscarCantidad.getText());
-                resultado = empleados.buscarPorCantidad(cantidad);
+                if (cantidad != null) {
+                    resultado = empleados.buscarPorCantidad(cantidad);
+                } else {
+                    resultado = "NOs se encontraron resultados.";
+                }
                 new Alert(Alert.AlertType.INFORMATION, resultado).showAndWait();
             }
         } catch (NumberFormatException ex) {
-            new Alert(Alert.AlertType.INFORMATION, errorMessage).showAndWait();
+            new Alert(Alert.AlertType.ERROR, errorMessage).showAndWait();
         } finally {
             txtBuscarCantidad.clear();
         }
@@ -203,7 +212,12 @@ public class MainController implements Initializable {
         try {
             if (!txtBuscarMes.getText().isBlank()) {
                 int mes = Integer.parseInt(txtBuscarMes.getText());
-                resultado = "Resultado: " + empleados.buscarMayorYMenorVendedorPorMes(mes);
+                if (mes > 0 && mes < 4) {
+                    resultado = "Resultado: " + empleados.buscarMayorYMenorVendedorPorMes(mes);
+                    
+                } else {
+                    resultado = "Ingrese un mes entre 1 y 3.";
+                }
                 new Alert(Alert.AlertType.INFORMATION, resultado).showAndWait();
             }
         } catch (NumberFormatException ex) {
@@ -222,8 +236,22 @@ public class MainController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        listarDatos();
-    }    
+        actualizarDatos();
+    }
+
+    private Double calcularTotalGeneral() {
+        List<MdEmpleado> todos = null;
+        Double total = 0.0;
+        try {
+            todos = empleados.listarEmpleados();
+            for (MdEmpleado empleado : todos) {
+                total += empleado.getTotal();
+            }
+        } catch (Exception ex) {
+            new Alert(Alert.AlertType.ERROR, errorMessage).showAndWait();
+        }
+        return total;
+    }
     
     void clearTextFields() {
         txtCodigo.clear();
@@ -253,9 +281,15 @@ public class MainController implements Initializable {
         return datos;
     }
     
-    void listarDatos() {
+    void actualizarDatos() {
         ObservableList<MdEmpleado> datos = null;
+        Double total = 0.0;
+        Double promedio = 0.0;
         try {
+            total = calcularTotalGeneral();
+            promedio = Math.round((total/3) * 100.0) / 100.0;
+            txtTotalGeneral.setText(String.valueOf(total));
+            txtPromedioGeneral.setText(String.valueOf(promedio));
             this.colCodigo.setCellValueFactory(new PropertyValueFactory("codigo"));
             this.colNombre.setCellValueFactory(new PropertyValueFactory("nombre"));
             this.colEnero.setCellValueFactory(new PropertyValueFactory("enero"));

@@ -14,7 +14,7 @@ import javafx.scene.control.Alert;
  */
 public class NominaEmpleados {
     private final AccesoDatosJDBC datos;
-    private final String errorMessage = "Ha ocurrido un problema.";
+    private final String errorMessage = "Ha ocurrido un problema procesamiento de datos";
     
     public NominaEmpleados(){
         this.datos = new AccesoDatosJDBC();
@@ -64,7 +64,7 @@ public class NominaEmpleados {
                 }
             }
             if (nombreMayor != null && nombreMenor != null) {
-                resultado = "\nMAYOR vendedor: " + nombreMayor + " con Q." + mayor + "\nMENOR vendedor: " + nombreMenor + " con Q." + menor;
+                resultado = "MAYOR vendedor: " + nombreMayor + " con Q." + mayor + "\nMENOR vendedor: " + nombreMenor + " con Q." + menor;
             }
         } catch (NumberFormatException ex) {
             new Alert(Alert.AlertType.ERROR, errorMessage).showAndWait();
@@ -112,13 +112,13 @@ public class NominaEmpleados {
             List<MdEmpleado> empleados = datos.listar();
             for (MdEmpleado empleado : empleados) {
                 if (Objects.equals(empleado.getEnero(), cantidad)) {
-                    resultado = empleado.getNombre() + " en el mes de enero";
+                    resultado = empleado.getNombre() + " en el mes de enero.";
                     break;
                 } else if (Objects.equals(empleado.getFebrero(), cantidad)) {
-                    resultado = empleado.getNombre() + " en el mes de febrero";
+                    resultado = empleado.getNombre() + " en el mes de febrero.";
                     break;
                 } else if (Objects.equals(empleado.getMarzo(), cantidad)) {
-                    resultado = empleado.getNombre() + " en el mes de marzo";
+                    resultado = empleado.getNombre() + " en el mes de marzo.";
                     break;
                 }
             }
